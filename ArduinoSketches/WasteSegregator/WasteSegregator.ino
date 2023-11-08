@@ -15,6 +15,9 @@
 #define POSITION_B 90
 #define POSITION_C 180
 
+// Define the delay for dropperservo2
+#define DROPPERSERVO2_DELAY 400
+
 // Create a Servo object
 Servo servo;
 Servo dropperservo2;
@@ -35,14 +38,17 @@ void loop() {
     // If the capacitive sensor reads a high value, move the servo to position A
     servo.write(POSITION_A);
     dropperservo2.write(POSITION_A);
+    delay(DROPPERSERVO2_DELAY);
   } else if (inductiveValue > INDUCTIVE_THRESHOLD) {
     // If the inductive sensor reads a high value, move the servo to position B
     servo.write(POSITION_B);
     dropperservo2.write(POSITION_B);
+    delay(DROPPERSERVO2_DELAY);
   } else {
     // If neither sensor reads a high value, move the servo to position C
     servo.write(POSITION_C);
     dropperservo2.write(POSITION_C);
+    delay(DROPPERSERVO2_DELAY);
   }
 
   // Wait for a while before the next reading
