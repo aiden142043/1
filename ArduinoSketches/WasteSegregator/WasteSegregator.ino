@@ -4,6 +4,7 @@
 #define CAPACITIVE_SENSOR_PIN A0
 #define INDUCTIVE_SENSOR_PIN A1
 #define SERVO_PIN 9
+#define DROPPERSERVO2_PIN 7
 
 // Define the thresholds for the sensors
 #define CAPACITIVE_THRESHOLD 500
@@ -16,10 +17,12 @@
 
 // Create a Servo object
 Servo servo;
+Servo dropperservo2;
 
 void setup() {
   // Initialize the Servo motor
   servo.attach(SERVO_PIN);
+  dropperservo2.attach(DROPPERSERVO2_PIN);
 }
 
 void loop() {
@@ -31,14 +34,17 @@ void loop() {
   if (capacitiveValue > CAPACITIVE_THRESHOLD) {
     // If the capacitive sensor reads a high value, move the servo to position A
     servo.write(POSITION_A);
+    dropperservo2.write(POSITION_A);
   } else if (inductiveValue > INDUCTIVE_THRESHOLD) {
     // If the inductive sensor reads a high value, move the servo to position B
     servo.write(POSITION_B);
+    dropperservo2.write(POSITION_B);
   } else {
     // If neither sensor reads a high value, move the servo to position C
     servo.write(POSITION_C);
+    dropperservo2.write(POSITION_C);
   }
 
   // Wait for a while before the next reading
-  delay(1000);
+  delay(2000);
 }
